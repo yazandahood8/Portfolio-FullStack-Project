@@ -1,0 +1,16 @@
+/* src/styles/_variables.scss
+   Global design tokens (WCAG-compliant contrast) */
+:root {
+  /* brand palette */
+  --color-bg-light: #f8f9fa;
+  --color-bg-card : #ffffff;
+  --color-text    : #212529;
+  --color-muted   : #6c757d;
+
+  /* animation timing */
+  --timing-fast   : .25s;
+  --timing-normal : .6s;
+
+  /* elevation */
+  --shadow-lg     : 0 1rem 3rem rgba(0, 0, 0, .175);
+}

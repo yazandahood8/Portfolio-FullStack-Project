@@ -1,0 +1,209 @@
+/* HomePage.css */
+
+:root {
+  --home-bg: #f6f8fa;
+  --profile-card-bg: #fff;
+  --primary-text: #21304c;
+  --secondary-text: #52607b;
+  --muted-text: #8a93a6;
+  --accent-blue: #2563eb;
+  --accent-blue-dark: #174ea6;
+  --accent-red: #ff3d3d;
+  --accent-red-dark: #c02a2a;
+  --accent-github: #23272f;
+  --accent-github-dark: #14161a;
+  --radius-card: 1.3rem;
+  --shadow-card: 0 8px 32px 0 rgba(37, 99, 235, 0.09);
+  --transition: 0.24s cubic-bezier(.4,0,.2,1);
+  --font-main: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+
+/* Main Layout */
+.min-h-screen {
+  min-height: 100vh;
+  background: var(--home-bg);
+  font-family: var(--font-main);
+  padding: 2.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bg-gray-50 {
+  background: var(--home-bg);
+}
+.p-6 {
+  padding: 1.7rem 0.9rem;
+}
+@media (max-width: 700px) {
+  .p-6 {
+    padding: 1rem 0.2rem;
+  }
+}
+
+/* Profile Card */
+.bg-white {
+  background: var(--profile-card-bg);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 2.2rem 2rem;
+  max-width: 32rem;
+  width: 100%;
+  text-align: center;
+  animation: fadeInUp 0.55s both;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Profile Image */
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.mb-4 {
+  margin-bottom: 1rem;
+}
+.w-36 {
+  width: 9rem;
+}
+.h-36 {
+  height: 9rem;
+}
+.object-cover {
+  object-fit: cover;
+}
+.rounded-full {
+  border-radius: 50%;
+}
+.shadow-sm {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.bg-white img {
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.bg-white img:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 16px rgba(37,99,235,0.12);
+}
+
+/* Name & Bio */
+.text-3xl {
+  font-size: 2rem;
+  color: var(--primary-text);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.font-semibold {
+  font-weight: 600;
+}
+.mb-2 {
+  margin-bottom: 0.6rem;
+}
+.text-gray-700 {
+  color: var(--secondary-text);
+}
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+/* Social Links */
+.flex {
+  display: flex;
+}
+.justify-center {
+  justify-content: center;
+}
+.space-x-4 > * + * {
+  margin-left: 1rem;
+}
+
+/* Social Buttons */
+.px-4 {
+  padding-left: 1.15rem;
+  padding-right: 1.15rem;
+}
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.text-white {
+  color: #fff;
+}
+.rounded {
+  border-radius: 0.7rem;
+}
+.transition {
+  transition: background-color var(--transition), transform 0.1s;
+  will-change: background-color, transform;
+}
+a {
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  box-shadow: 0 2px 10px 0 rgba(37,99,235,0.04);
+  display: inline-block;
+}
+a:active {
+  transform: scale(0.97);
+}
+.bg-gray-800 {
+  background: var(--accent-github);
+}
+.bg-gray-800:hover,
+.hover\:bg-gray-900:hover {
+  background: var(--accent-github-dark);
+}
+.bg-blue-600 {
+  background: var(--accent-blue);
+}
+.bg-blue-600:hover,
+.hover\:bg-blue-700:hover {
+  background: var(--accent-blue-dark);
+}
+.bg-red-600 {
+  background: var(--accent-red);
+}
+.bg-red-600:hover,
+.hover\:bg-red-700:hover {
+  background: var(--accent-red-dark);
+}
+
+/* Loading & Error */
+.min-h-screen > .flex > p,
+.min-h-screen > p {
+  font-size: 1.25rem;
+  color: var(--muted-text);
+  animation: fadePulse 1.2s infinite alternate;
+  text-align: center;
+  margin-top: 2.5rem;
+}
+@keyframes fadePulse {
+  0% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .bg-white {
+    padding: 1.1rem 0.5rem;
+  }
+  .text-3xl {
+    font-size: 1.3rem;
+  }
+  .w-36,
+  .h-36 {
+    width: 5.2rem;
+    height: 5.2rem;
+  }
+  .space-x-4 > * + * {
+    margin-left: 0.45rem;
+  }
+}

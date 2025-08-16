@@ -1,0 +1,177 @@
+.cv-bg {
+  min-height: 100vh;
+  background: linear-gradient(120deg, #20264c 0%, #a1e7ff 100%);
+  padding: 2vw 1vw 4vw 1vw;
+}
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.cv-card {
+  max-width: 56rem;
+  width: 100%;
+  background: linear-gradient(120deg, #232a52ee 88%, #b8eaff35 100%);
+  box-shadow: 0 0.7rem 2.5rem #47d6ff23, 0 4rem 6rem -1.5rem #2e6aea18;
+  border-radius: 2.2rem;
+  border: 2px solid #74e1ffbb;
+  margin: 0 auto;
+  padding: 2.6rem 2rem 2.1rem 2rem;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2.1rem;
+}
+
+.cv-title {
+  color: #aafaff;
+  font-size: 2.2rem;
+  font-weight: 900;
+  text-align: center;
+  letter-spacing: -.02em;
+  margin-bottom: 2.1rem;
+  text-shadow: 0 2px 14px #1cf4ff33, 0 1px 1px #463c6a55;
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+}
+.cv-loading { color: #f8ffb7; font-weight: 600; margin-bottom: 1.1rem; }
+.cv-error { color: #ff6494; font-weight: 700; font-size: 1.13rem; margin-bottom: 1.2rem; }
+.cv-empty { color: #8bd6ed; font-style: italic; margin-bottom: 1.2rem; }
+
+.cv-profile-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: linear-gradient(110deg,#272c57 70%,#67e2ff3c 100%);
+  padding: 1.2rem 1rem 1.2rem 1rem;
+  border-radius: 1.2em;
+  box-shadow: 0 4px 12px #22baff19;
+  margin-bottom: 1.5rem;
+}
+.cv-profile-avatar {
+  width: 5.5rem; height: 5.5rem;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 0 0 7px #bbf3fd44, 0 0 44px 14px #64e4ffc4;
+  background: #fff;
+  border: 2px solid #fffdfdcc;
+}
+.cv-profile-name {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: #fafdff;
+  letter-spacing: -.01em;
+  margin-bottom: .35rem;
+}
+.cv-profile-meta {
+  color: #b1eaff;
+  font-size: 1.01rem;
+  margin-bottom: .29rem;
+}
+.cv-profile-bio {
+  color: #d8fbff;
+  font-size: 1.03rem;
+}
+
+.cv-section {
+  margin-bottom: 1.8rem;
+}
+.cv-section-title {
+  color: #93eaff;
+  font-size: 1.11rem;
+  font-weight: 800;
+  margin-bottom: .6rem;
+  letter-spacing: .02em;
+}
+
+.cv-list {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 0.72em;
+}
+.cv-list-item {
+  background: linear-gradient(110deg,#21245c 60%,#66e2ffa9 100%);
+  border-radius: 1.1em;
+  box-shadow: 0 2px 12px #22baff19;
+  padding: .72em 1em .52em 1em;
+  color: #e5f8ff;
+  font-size: 1.02em;
+}
+
+.cv-list-dates { color: #c9e7fb; font-size: .97em; margin-right: .6em;}
+
+.cv-skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45em;
+  margin: 0; padding: 0;
+}
+.cv-skill-item {
+  display: flex;
+  align-items: center;
+  gap: .5em;
+  padding: .6em 1em .4em 1em;
+  background: linear-gradient(110deg,#23245c 80%,#e2fcff19 100%);
+  border-radius: 1em;
+  font-weight: 600;
+  color: #fafffe;
+  font-size: 1.01em;
+}
+.cv-skill-dot {
+  width: 1em; height: 1em;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: .2em;
+  box-shadow: 0 1px 8px #7bdaff44;
+  border: 1.5px solid #fff;
+}
+.cv-skill-dot.beginner { background: #ffe66e; }
+.cv-skill-dot.intermediate { background: #67c7fd; }
+.cv-skill-dot.expert { background: #a46dff; }
+.cv-skill-title { font-weight: 700; color: #e9ffff; }
+.cv-skill-level { color: #6df6ff; margin-left: .9em;}
+.cv-skill-category { color: #bcf3f3; margin-left: 1.2em;}
+
+.cv-btn-row {
+  display: flex;
+  gap: 1.3em;
+  margin: 1.2em 0 0 0;
+  align-items: center;
+  justify-content: flex-end;
+}
+.cv-download-btn, .cv-show-btn {
+  background: linear-gradient(90deg,#67c7fd 20%,#9a5bff 100%);
+  color: #fff;
+  font-weight: 900;
+  font-size: 1.03em;
+  border: none;
+  border-radius: 1.2em;
+  padding: .7em 2.1em;
+  box-shadow: 0 1px 9px #8afcff88;
+  transition: background .14s, box-shadow .19s, transform .13s;
+  cursor: pointer;
+}
+.cv-show-btn { background: linear-gradient(90deg,#9a5bff 7%,#67c7fd 92%);}
+.cv-download-btn:disabled, .cv-show-btn:disabled { opacity: .65; cursor: not-allowed; }
+.cv-download-btn:hover, .cv-show-btn:hover,
+.cv-download-btn:focus, .cv-show-btn:focus {
+  box-shadow: 0 4px 22px #7fd6ffcc;
+  transform: scale(1.05) translateY(-2px);
+}
+.cv-pdf-viewer {
+  border: 2.2px solid #9befff88;
+  border-radius: 1.2rem;
+  margin-top: 1.3em;
+  box-shadow: 0 2px 22px #71f4ff3c;
+  width: 100%;
+  background: #fafdff;
+  min-height: 380px;
+}
+.cv-link { color: #67c7fd; text-decoration: underline; }
+@media (max-width: 700px) {
+  .cv-card { padding: 1.2rem .7rem 1rem .7rem; border-radius: 1.1rem;}
+  .cv-profile-header { flex-direction: column; gap: .8rem; text-align: center;}
+  .cv-profile-avatar { width: 4.1rem; height: 4.1rem;}
+  .cv-btn-row { flex-direction: column; gap: .7em; }
+  .cv-pdf-viewer { min-height: 220px; }
+}

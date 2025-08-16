@@ -1,0 +1,305 @@
+@import '../styles/_variables';
+
+/* ==============================
+   1. Theme & Core Colors
+   ============================== */
+:root {
+  --hero-bg1: #141b44;
+  --hero-bg2: #413e78;
+  --hero-bg3: #71faff88;
+  --hero-bg4: #e2c0ff44;
+  --hero-glass1: rgba(53, 96, 183, 0.86);
+  --hero-glass2: rgba(90, 53, 183, 0.22);
+  --hero-neon: #47f6f3;
+  --hero-neon2: #c98fff;
+  --hero-pink: #ff9ac8;
+  --hero-gold: #ffe9a2;
+  --hero-btn-grad1: #5236f4;
+  --hero-btn-grad2: #1ceaff;
+  --hero-btn-grad3: #ffe3ae;
+  --hero-btn-grad4: #ed6aa7;
+  --hero-glass-border: #7addfaee;
+}
+
+/* ==============================
+   2. Layered Animated Background
+   ============================== */
+body {
+  min-height: 100vh;
+  background: linear-gradient(115deg, var(--hero-bg1) 0%, var(--hero-bg2) 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+body::before, body::after {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  z-index: 0;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: .29;
+}
+body::before {
+  width: 50vw; height: 50vw;
+  left: -10vw; top: -10vw;
+  background: radial-gradient(circle, var(--hero-bg3), transparent 75%);
+  animation: bgblob1 18s ease-in-out infinite alternate;
+}
+body::after {
+  width: 42vw; height: 42vw;
+  right: -12vw; bottom: -8vw;
+  background: radial-gradient(circle, var(--hero-bg4), transparent 80%);
+  animation: bgblob2 22s ease-in-out infinite alternate;
+}
+@keyframes bgblob1 { 0% {top:-10vw;left:-10vw;} 100% {top:0vw;left:6vw;} }
+@keyframes bgblob2 { 0% {right:-12vw;bottom:-8vw;} 100% {right:-4vw;bottom:0vw;} }
+
+/* sparkles */
+.c-sparkle {
+  pointer-events: none;
+  z-index: 3;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left:0;top:0;
+}
+.c-sparkle span {
+  position: absolute;
+  background: radial-gradient(circle, #fffbe8ee 30%, #7a84ff55 75%, transparent 100%);
+  width: 7px; height: 7px; border-radius: 50%;
+  opacity: .73;
+  animation: sparkleTwinkle 2.4s infinite alternate;
+  will-change: opacity, transform;
+}
+.c-sparkle span:nth-child(1) { left:16%; top: 14%; animation-delay: .2s;}
+.c-sparkle span:nth-child(2) { left:78%; top: 17%; animation-delay: 1.1s;}
+.c-sparkle span:nth-child(3) { left:38%; top: 55%; animation-delay: .5s;}
+.c-sparkle span:nth-child(4) { left:61%; top: 75%; animation-delay: .7s;}
+.c-sparkle span:nth-child(5) { left:80%; top: 78%; animation-delay: 1.7s;}
+@keyframes sparkleTwinkle {
+  0%   { opacity: .6; transform: scale(0.9);}
+  36%  { opacity: 1;  transform: scale(1.23);}
+  70%  { opacity: .56; transform: scale(1);}
+  100% { opacity: .6; transform: scale(0.9);}
+}
+
+/* ==============================
+   3. Center Layout, Card Perspective
+   ============================== */
+.l-center {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 2000px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ==============================
+   4. Main Glass Card
+   ============================== */
+.c-profile-card {
+  position: relative;
+  z-index: 3;
+  max-width: 33rem;
+  padding: 2.5rem 2rem 2.3rem 2rem;
+  border-radius: 2.5rem;
+  overflow: visible;
+  background:
+    linear-gradient(117deg, var(--hero-glass1) 70%, var(--hero-glass2) 98%);
+  border: 2.5px solid var(--hero-glass-border);
+  box-shadow:
+    0 10px 60px 0 #5ebeff55,
+    0 2.5rem 4rem #dbaaff30,
+    0 0 0 10px #e7fdff12 inset;
+  backdrop-filter: blur(2.1rem) saturate(120%);
+  -webkit-backdrop-filter: blur(2.1rem) saturate(120%);
+  transition:
+    transform .47s cubic-bezier(.27,1.24,.41,1.04),
+    box-shadow .48s cubic-bezier(.23,1.24,.41,1.04);
+
+  /* animated edge “shine” on hover/focus */
+  &::after {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    left: -20%;
+    top: 0;
+    width: 140%;
+    height: 120%;
+    background: linear-gradient(100deg, transparent 46%, #fff9 51%, transparent 57%);
+    opacity: 0;
+    transform: skewX(-12deg);
+    border-radius: 2.5rem;
+    transition: opacity .18s;
+    z-index: 5;
+  }
+
+  &:hover,
+  &:focus-visible {
+    transform: scale(1.037) rotateY(10deg) rotateX(-6deg);
+    box-shadow:
+      0 14px 60px 0 #43f6ff77,
+      0 2rem 6rem #ae78ff66,
+      0 0 0 15px #ffe4fa22 inset;
+    &::after {
+      opacity: 1;
+      animation: card-shine 0.9s cubic-bezier(.24,.7,.46,1.1) 1;
+    }
+  }
+}
+@keyframes card-shine {
+  0%   { left: -40%; opacity: 0;}
+  45%  { left: 25%; opacity: .85;}
+  100% { left: 100%; opacity: 0;}
+}
+@media (max-width: 599px) {
+  .c-profile-card { max-width: 99vw; padding: 1.1rem .4rem 1.7rem .4rem;}
+}
+
+/* ==============================
+   5. Avatar: Triple Glow, Pulse, Shine
+   ============================== */
+.c-profile-card__avatar {
+  position: relative;
+  width: 9.4rem; height: 9.4rem;
+  margin-bottom: 1.12rem;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow:
+    0 0 0 7px #cffbffd0,
+    0 0 44px 14px var(--hero-neon2),
+    0 0 0 20px #47f6f324 inset;
+  border: 4px solid #fafdff;
+  background: linear-gradient(130deg, #f1f8ff 35%, #e6f3ff 100%);
+  transition: transform .47s cubic-bezier(.35,.78,.52,1.22), box-shadow .49s cubic-bezier(.32,.78,.62,1.22);
+
+  /* soft halo */
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    left: -20%; top: -20%;
+    width: 140%; height: 140%;
+    background:
+      radial-gradient(circle, var(--hero-neon) 0 37%, transparent 70%),
+      radial-gradient(circle, var(--hero-pink) 0 17%, transparent 56%);
+    opacity: 0.14;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(3.2px);
+  }
+
+  /* animated pulse ring */
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    left: 50%; top: 50%;
+    width: 118%; height: 118%;
+    background: radial-gradient(circle, #ffffff80 32%, #74fafd22 60%, transparent 90%);
+    border-radius: 50%;
+    opacity: .35;
+    filter: blur(2.5px);
+    pointer-events: none;
+    transform: translate(-50%,-50%) scale(1);
+    animation: avatarPulse 2.2s cubic-bezier(.41,1.01,.41,1) infinite alternate;
+  }
+}
+@keyframes avatarPulse {
+  0%   { transform: translate(-50%,-50%) scale(1);}
+  60%  { transform: translate(-50%,-50%) scale(1.04);}
+  100% { transform: translate(-50%,-50%) scale(1);}
+}
+
+/* animated sweep shine */
+.c-profile-card__avatar::after {
+  content: '';
+  position: absolute;
+  z-index: 3;
+  top: 22%; left: -55%;
+  width: 78%; height: 62%;
+  background: linear-gradient(101deg, transparent 0%, #fff8 42%, #b4fdff99 59%, transparent 100%);
+  opacity: .7;
+  border-radius: 44% 55% 60% 48%/44% 60% 44% 54%;
+  filter: blur(2.8px);
+  pointer-events: none;
+  animation: avatarShine 2.1s linear infinite;
+}
+@keyframes avatarShine {
+  0%   { left: -50%; opacity: .23;}
+  40%  { left: 35%; opacity: .89;}
+  100% { left: 105%; opacity: 0;}
+}
+
+.c-profile-card:hover .c-profile-card__avatar,
+.c-profile-card:focus-visible .c-profile-card__avatar {
+  transform: scale(1.07) rotateZ(-1.8deg) translateY(-8px);
+  box-shadow:
+    0 0 0 14px var(--hero-gold),
+    0 2rem 2.8rem -0.5rem var(--hero-pink),
+    0 0 0 23px #d4b8ff15 inset,
+    0 0 42px 13px #a8fafd44;
+}
+
+/* ==============================
+   6. Typography
+   ============================== */
+.c-profile-card .h2, .c-profile-card h2, .c-profile-card .fw-bold {
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  font-weight: 900;
+  color: #fafdff;
+  letter-spacing: -0.012em;
+  text-shadow: 0 2px 16px #1cf4ff33, 0 1px 1px #463c6a99;
+}
+.c-profile-card p, .c-profile-card .text-muted {
+  color: #f0eaffd9;
+  font-weight: 500;
+  font-size: 1.15rem;
+  text-shadow: 0 2px 8px #45286633;
+}
+
+/* ==============================
+   7. Buttons: Gradient, Iridescent Glow
+   ============================== */
+.c-profile-card nav ul li a.btn {
+  box-shadow: 0 3px 14px #69eaff22, 0 0 0 1px #ffeab933;
+  border-radius: 1.2rem;
+  font-size: 1.08rem;
+  letter-spacing: 0.013em;
+  font-weight: 800;
+  border: none;
+  filter: brightness(1.09) saturate(110%);
+  padding: .65em 2.2em;
+  text-shadow: 0 1px 10px #fff8;
+  transition: background .19s, box-shadow .32s, transform .21s, filter .13s;
+  position: relative;
+  overflow: hidden;
+}
+.c-profile-card nav ul li a.btn-dark    { background: linear-gradient(90deg,#181e26,#68d5ff 84%);}
+.c-profile-card nav ul li a.btn-primary { background: linear-gradient(90deg,#6c40fd 7%,#09c1ef 97%);}
+.c-profile-card nav ul li a.btn-danger  { background: linear-gradient(90deg,#ff4173,#ffd36b 80%);}
+.c-profile-card nav ul li a.btn:hover,
+.c-profile-card nav ul li a.btn:focus {
+  filter: brightness(1.21) saturate(122%);
+  transform: scale(1.09) translateY(-1px);
+  box-shadow: 0 6px 26px #edfcff99, 0 0 0 2px #a0b1ff99;
+}
+.c-profile-card nav ul li a.btn::after {
+  content: "";
+  position: absolute; left:0; top:0;
+  width:100%; height:100%;
+  border-radius:inherit;
+  background: linear-gradient(105deg,#fff3 8%,transparent 75%);
+  opacity:0;
+  transition: opacity .23s;
+}
+.c-profile-card nav ul li a.btn:hover::after,
+.c-profile-card nav ul li a.btn:focus::after {
+  opacity:.17;
+}
+@media (max-width: 599px) {
+  .c-profile-card__avatar { width: 6.7rem; height: 6.7rem; }
+  .c-profile-card .h2, .c-profile-card h2 { font-size: 1.05rem; }
+}

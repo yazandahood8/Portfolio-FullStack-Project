@@ -1,0 +1,249 @@
+/* src/pages/UserDetailPage/UserDetailPage.css */
+
+/* --- Global page bg (matches HomePage glassmorphism) --- */
+.profile-bg {
+  min-height: 100vh;
+  background: linear-gradient(120deg, #23274e 0%, #373f8b 70%, #9aefff 100%);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2vw 1vw 4vw 1vw;
+}
+
+/* --- Card container --- */
+.userdetail-card {
+  background:
+    linear-gradient(120deg, #292f4bcc 72%, #60e6ff33 98%),
+    rgba(255,255,255,0.03);
+  box-shadow:
+    0 0.7rem 2.5rem #28d6ff25,
+    0 4rem 6rem -1.5rem #6a40e835,
+    0 0 0 8px #c8eaff19 inset;
+  backdrop-filter: blur(2.1rem) saturate(116%);
+  -webkit-backdrop-filter: blur(2.1rem) saturate(116%);
+  border-radius: 2.1rem;
+  border: 2.5px solid #74e1ffbb;
+  max-width: 40rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.6rem 2rem 2rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Profile Header --- */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+  margin-bottom: 1.9rem;
+}
+
+.profile-avatar {
+  width: 7.7rem; height: 7.7rem;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  box-shadow:
+    0 0 0 7px #c4e7ffb6,
+    0 0 44px 14px #64e4ffc4,
+    0 0 0 20px #e0c2ff19 inset;
+  border: 3px solid #fffdfdcc;
+  background: linear-gradient(132deg, #f1f8ff 25%, #dbe8fe 100%);
+  position: relative;
+  z-index: 4;
+  transition: transform .41s cubic-bezier(.35,.78,.52,1.22), box-shadow .39s cubic-bezier(.32,.78,.62,1.22);
+}
+
+.profile-avatar::after {
+  content: '';
+  position: absolute;
+  top: 22%; left: -46%;
+  width: 78%; height: 62%;
+  background: linear-gradient(101deg, transparent 0%, #fff8 42%, #aef3ff44 60%, transparent 100%);
+  opacity: .64;
+  border-radius: 44% 55% 60% 48%/44% 60% 44% 54%;
+  filter: blur(2.2px);
+  pointer-events: none;
+  animation: avatarShine 2.1s linear infinite;
+  z-index: 5;
+}
+@keyframes avatarShine {
+  0%   { left: -50%; opacity: .21;}
+  40%  { left: 35%; opacity: .76;}
+  100% { left: 105%; opacity: 0;}
+}
+
+.profile-header h1.profile-name {
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  font-weight: 900;
+  color: #fafdff;
+  letter-spacing: -0.009em;
+  margin-bottom: .7rem;
+  text-shadow: 0 2px 16px #1cf4ff33, 0 1px 1px #463c6a99;
+}
+.profile-info-list {
+  list-style: none;
+  padding: 0; margin: 0;
+}
+.profile-info-label {
+  font-weight: 700;
+  color: #65e8ff;
+  margin-right: .5em;
+  letter-spacing: 0.01em;
+}
+.profile-info-list li {
+  color: #f0eaffd9;
+  font-weight: 500;
+  margin-bottom: 0.17rem;
+  font-size: 1.08rem;
+}
+
+/* --- Section titles & spacing --- */
+.profile-section-title {
+  font-family: 'Montserrat', Arial, sans-serif;
+  color: #7bdfff;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: .8rem;
+  margin-top: 1.5rem;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 6px #0099ff18;
+}
+
+.profile-section {
+  margin-bottom: 1.3rem;
+  color: #e8f6ff;
+}
+.profile-section:last-child { margin-bottom: 0; }
+.profile-empty { color: #93c7d7c2; font-style: italic; }
+
+/* --- Social links --- */
+.profile-socials {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.social-btn {
+  padding: .53em 1.6em;
+  border-radius: 1.4em;
+  font-weight: 700;
+  font-size: 1.03em;
+  border: none;
+  color: #fff;
+  text-shadow: 0 2px 6px #1749b422;
+  background: linear-gradient(90deg,#68b8ff 0 80%,#b36fff 100%);
+  box-shadow: 0 2px 8px #57faff21;
+  transition: background .18s, box-shadow .29s, transform .21s;
+}
+.social-btn.github { background: linear-gradient(90deg,#222,#6ad1fa 80%);}
+.social-btn.linkedin { background: linear-gradient(90deg,#1266a9,#00f2fe);}
+.social-btn.youtube { background: linear-gradient(90deg,#e94057,#ff6a00);}
+.social-btn:hover,
+.social-btn:focus { filter: brightness(1.12); transform: scale(1.05); }
+
+/* --- Skills --- */
+.skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: .76em;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.skill-item {
+  padding: .7em 1em .6em 1em;
+  background: linear-gradient(110deg,#20245c 60%,#66e2ffa9 100%);
+  border-radius: 1.1em;
+  box-shadow: 0 4px 12px #22baff14;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background .15s;
+}
+.skill-name-row {
+  display: flex;
+  align-items: center;
+  gap: .5em;
+  flex: 1 1 0;
+}
+.skill-title {
+  color: #fafdff;
+  font-weight: 700;
+  font-size: 1.09em;
+  margin-right: .7em;
+  letter-spacing: 0.01em;
+}
+.skill-level-dot {
+  width: 1.05em;
+  height: 1.05em;
+  border-radius: 50%;
+  margin-right: .15em;
+  display: inline-block;
+  box-shadow: 0 0 8px #7efcff55;
+  border: 2.5px solid #0e74ae22;
+}
+.skill-level-dot.beginner { background: #fffcb0; box-shadow: 0 0 6px #ffe07399;}
+.skill-level-dot.intermediate { background: #8df7ff; box-shadow: 0 0 8px #3ee8ffbb;}
+.skill-level-dot.expert { background: #dc9fff; box-shadow: 0 0 12px #7b47ffbb;}
+.skill-level-label {
+  color: #aef8ff;
+  font-weight: 700;
+  font-size: .96em;
+  letter-spacing: 0.02em;
+  margin-left: .6em;
+}
+.skill-category {
+  font-size: .93em;
+  color: #d9e7f7d0;
+  margin-left: 1.3em;
+  letter-spacing: .01em;
+}
+
+/* --- Responsive tweaks --- */
+@media (max-width: 850px) {
+  .userdetail-card { padding: 1.2rem .7rem 1.2rem .7rem; }
+  .profile-header { gap: 1.2rem; }
+  .profile-avatar { width: 5.5rem; height: 5.5rem; }
+}
+
+@media (max-width: 480px) {
+  .userdetail-card { padding: .55rem .13rem .9rem .13rem; border-radius: 1.1rem;}
+  .profile-header { flex-direction: column; align-items: flex-start; gap: .5rem;}
+  .profile-avatar { width: 4.5rem; height: 4.5rem; }
+  .profile-header h1 { font-size: 1.03rem;}
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.c-sparkle {
+  pointer-events: none;
+  z-index: 5;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left:0;top:0;
+}
+.c-sparkle span {
+  position: absolute;
+  background: radial-gradient(circle, #fffbe8ee 30%, #7a84ff55 75%, transparent 100%);
+  width: 7px; height: 7px; border-radius: 50%;
+  opacity: .73;
+  animation: sparkleTwinkle 2.4s infinite alternate;
+  will-change: opacity, transform;
+}
+.c-sparkle span:nth-child(1) { left:16%; top: 14%; animation-delay: .2s;}
+.c-sparkle span:nth-child(2) { left:78%; top: 17%; animation-delay: 1.1s;}
+.c-sparkle span:nth-child(3) { left:38%; top: 55%; animation-delay: .5s;}
+.c-sparkle span:nth-child(4) { left:61%; top: 75%; animation-delay: .7s;}
+.c-sparkle span:nth-child(5) { left:80%; top: 78%; animation-delay: 1.7s;}
+@keyframes sparkleTwinkle {
+  0%   { opacity: .6; transform: scale(0.9);}
+  36%  { opacity: 1;  transform: scale(1.23);}
+  70%  { opacity: .56; transform: scale(1);}
+  100% { opacity: .6; transform: scale(0.9);}
+}

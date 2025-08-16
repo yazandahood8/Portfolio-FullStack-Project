@@ -1,0 +1,356 @@
+
+/* =========================
+   Profile form (glass) 
+   ========================= */
+.profile-form {
+  display: grid;
+  gap: 1rem;
+}
+
+/* Group rows responsively if you want side-by-side later */
+@media (min-width: 720px) {
+  .profile-form--two-col {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.2rem;
+  }
+}
+
+/* Inputs / textareas */
+.profile-form .form-control {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 2px solid #6fe3ff52;
+  border-radius: 0.9rem;
+  background: linear-gradient(120deg, #1a2142 60%, #3a6cff1a 100%);
+  color: #eaffff;
+  outline: none;
+  box-shadow:
+    0 2px 10px #1cf4ff14,
+    inset 0 0 0 2px #73e7ff12;
+  transition: border-color .18s ease, box-shadow .18s ease, transform .08s ease;
+}
+
+.profile-form .form-control::placeholder {
+  color: #b8eaffcc;
+  opacity: .9;
+}
+
+/* Focus state: soft cyan glow + slight lift */
+.profile-form .form-control:focus {
+  border-color: #8feaff;
+  box-shadow:
+    0 6px 22px #4ee8ff2b,
+    0 2px 10px #3fc8ff2a,
+    inset 0 0 0 2px #9ae7ff22;
+  transform: translateY(-1px);
+}
+
+/* Autofill fix (Chrome) */
+.profile-form input.form-control:-webkit-autofill,
+.profile-form textarea.form-control:-webkit-autofill {
+  -webkit-text-fill-color: #eaffff !important;
+  -webkit-box-shadow: 0 0 0px 1000px #1a2142 inset;
+  box-shadow: 0 0 0px 1000px #1a2142 inset;
+  caret-color: #eaffff;
+}
+
+/* Validation helpers */
+.profile-form .form-control.is-invalid {
+  border-color: #ff7aa6cc;
+  box-shadow: 0 6px 18px #ff4d7a26, inset 0 0 0 2px #ff86a533;
+}
+.profile-form .error-text {
+  color: #ff9ab7;
+  font-size: .9rem;
+  margin-top: -.4rem;
+}
+
+/* Action button, matching your existing gradient language */
+.profile-form .btn-save {
+  appearance: none;
+  border: none;
+  border-radius: 1rem;
+  padding: 0.7rem 1.6rem;
+  font-weight: 800;
+  letter-spacing: .01em;
+  color: #ffffff;
+  background: linear-gradient(90deg,#67c7fd 18%,#9a5bff 100%);
+  box-shadow: 0 2px 16px #7bdaff66, 0 6px 28px #5d9bff24;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .18s ease, background .18s ease;
+}
+
+.profile-form .btn-save:hover,
+.profile-form .btn-save:focus {
+  transform: translateY(-1px) scale(1.02);
+  background: linear-gradient(90deg,#9a5bff 7%,#67c7fd 92%);
+  box-shadow: 0 6px 24px #a7eaffaa, 0 8px 36px #5d9bff33;
+}
+
+/* Make the form harmonize inside your glass card */
+.edit-profile-card .profile-form .form-control {
+  background: linear-gradient(120deg, #1b2143 55%, #66e2ff1a 100%);
+}
+
+/* Optional: subtle separators if you wrap fields in sections */
+.profile-form .section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #8ce7ff55, transparent);
+  margin: .2rem 0 .6rem 0;
+}
+/* Glassmorphism global for this page */
+.edit-profile-bg {
+  min-height: 100vh;
+  background: linear-gradient(120deg, #20264c 0%, #8be7ff 100%);
+  padding: 2vw 1vw 4vw 1vw;
+}
+
+/* Card wrapper */
+.edit-profile-card {
+  max-width: 56rem;
+  width: 100%;
+  background: linear-gradient(120deg, #222a54ee 88%, #99eaff33 100%);
+  box-shadow: 0 0.7rem 2.5rem #47d6ff23, 0 4rem 6rem -1.5rem #2e6aea18, 0 0 0 8px #eafaff12 inset;
+  backdrop-filter: blur(2.1rem) saturate(120%);
+  -webkit-backdrop-filter: blur(2.1rem) saturate(120%);
+  border-radius: 2.2rem;
+  border: 2px solid #74e1ffbb;
+  margin: 0 auto;
+  padding: 2.8rem 2rem 2.3rem 2rem;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* Section titles */
+.edit-profile-card h2 {
+  color: #aafaff;
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: -.01em;
+  margin-bottom: 1.2rem;
+  text-shadow: 0 2px 14px #1cf4ff33, 0 1px 1px #463c6a55;
+}
+
+/* Section header bar */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: .7em;
+}
+
+/* Add button */
+.add-btn {
+  background: linear-gradient(90deg,#67c7fd 12%,#9a5bff 90%);
+  color: #fff;
+  font-weight: 900;
+  border: none;
+  border-radius: 1.4rem;
+  box-shadow: 0 2px 16px #7bdaff88;
+  padding: 0.55em 1.8em;
+  cursor: pointer;
+  transition: background .16s, box-shadow .19s, transform .15s;
+}
+.add-btn:hover, .add-btn:focus {
+  background: linear-gradient(90deg,#9a5bff 7%,#67c7fd 92%);
+  box-shadow: 0 4px 22px #a7eaffcc;
+  transform: scale(1.05) translateY(-2px);
+}
+
+/* Item list and cards */
+.item-list {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 0.67em;
+}
+.item-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(110deg,#21245c 60%,#66e2ffa9 100%);
+  border-radius: 1.2em;
+  box-shadow: 0 4px 12px #22baff19;
+  padding: .7em 1em .6em 1em;
+  color: #e5f8ff;
+  min-height: 2.7em;
+}
+.item-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: .18em;
+}
+.item-title { font-weight: 700; color: #fafdff; font-size: 1.02em; }
+.item-subtitle, .item-description { color: #b9f0f7; font-size: .98em; }
+.item-actions {
+  display: flex;
+  gap: 0.45em;
+  align-items: center;
+  margin-left: 1em;
+}
+.icon-btn {
+  background: none;
+  border: none;
+  font-size: 1.17em;
+  padding: .18em .48em;
+  border-radius: 0.6em;
+  cursor: pointer;
+  transition: background .16s;
+}
+.icon-btn:hover { background: #61d9ff22; }
+.icon-btn.delete:hover { background: #ff649432; }
+
+/* Glassy profile image uploader */
+.image-upload-section {
+  margin-bottom: 2rem;
+}
+.image-preview-container {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 0 7px #bbf3fd44, 0 0 44px 14px #64e4ffc4;
+  transition: box-shadow .22s;
+}
+.image-preview {
+  width: 6.5rem; height: 6.5rem;
+  object-fit: cover;
+  border-radius: 50%;
+  background: #f7fbff;
+  border: 3px solid #fffdfdcc;
+  display: block;
+}
+.image-preview-overlay {
+  position: absolute; left: 0; right: 0; top: 0; bottom: 0;
+  background: linear-gradient(90deg,#00f0ff11 10%,#6261fd19 90%);
+  opacity: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 2.1rem; color: #89f2ff;
+  transition: opacity .22s;
+}
+.image-preview-container:hover .image-preview-overlay,
+.image-preview-container:focus .image-preview-overlay {
+  opacity: 1;
+}
+.selected-filename { color: #b1eaff; margin-top: .3em; }
+.upload-actions-container { display: flex; gap: .7em; margin-top: 0.6em; }
+.btn-upload-image, .btn-cancel-image {
+  padding: 0.39em 1.55em;
+  font-size: 1em;
+  font-weight: 700;
+  border-radius: 1em;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 1px 8px #7bdaff44;
+  background: linear-gradient(90deg,#67c7fd 30%,#b288ff 110%);
+  color: #fff;
+  transition: background .18s, box-shadow .19s, transform .13s;
+}
+.btn-upload-image:disabled { opacity: .7; cursor: not-allowed; }
+.btn-upload-image:hover, .btn-upload-image:focus {
+  background: linear-gradient(90deg,#b288ff 7%,#67c7fd 92%);
+  box-shadow: 0 3px 16px #a7eaffbb;
+  transform: scale(1.04) translateY(-2px);
+}
+.btn-cancel-image {
+  background: #ff6494;
+  box-shadow: 0 1px 6px #f172b733;
+}
+.btn-cancel-image:hover, .btn-cancel-image:focus {
+  background: #fd3b5d;
+  color: #fff;
+}
+
+/* Modal glass styles */
+.modal-backdrop {
+  position: fixed; z-index: 10000; inset: 0;
+  background: rgba(26,39,67,0.44);
+  display: flex; align-items: center; justify-content: center;
+  animation: modalFadeIn .18s;
+}
+.modal-content {
+  background: linear-gradient(110deg, #232a4cdd 70%, #9aefff33 100%);
+  backdrop-filter: blur(10px) saturate(1.35);
+  -webkit-backdrop-filter: blur(10px) saturate(1.35);
+  border-radius: 1.1em;
+  border: 2.5px solid #8ce7ffa2;
+  box-shadow:
+    0 0 0 2.5px #72ecff61,
+    0 8px 44px #21e6ff37,
+    0 2px 18px #52bdf544;
+  padding: 1.3em 0.7em 1em 0.7em;
+  min-width: 65vw;      /* smaller than before */
+  max-width: 300px;     /* compact but usable for forms */
+   max-height: 78vh;         /* Never exceeds 78% of viewport height */
+  overflow-y: auto;
+  width: 100%;
+  animation: swapUp 0.38s cubic-bezier(.62,-0.14,.37,1.23) both;
+  will-change: transform, opacity;
+  transform-origin: bottom;
+  margin: 0 auto;
+}
+
+.modal-title {
+  font-size: 1.18em;
+  color: #81e6ff;
+  font-weight: 900;
+  margin-bottom: .8em;
+  text-align: left;
+}
+.modal-form label {
+  color: #8beaff;
+  font-size: 1em;
+  margin-top: .8em;
+  margin-bottom: .2em;
+  display: block;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.modal-form input, .modal-form select, .modal-form textarea {
+  width: 100%;
+  padding: 0.7em .9em;
+  margin-bottom: .6em;
+  border-radius: 0.8em;
+  border: none;
+  font-size: 1.03em;
+  background: #1b213b;
+  color: #eaffff;
+  box-shadow: 0 2px 10px #1cf4ff11;
+}
+.modal-form textarea { min-height: 70px; }
+.modal-actions {
+  display: flex; gap: 0.9em; margin-top: 1.5em; justify-content: flex-end;
+}
+.btn-cancel, .btn-submit {
+  padding: 0.45em 1.9em;
+  font-size: 1em;
+  border-radius: 1em;
+  border: none;
+  font-weight: 700;
+  box-shadow: 0 1px 8px #7bdaff33;
+  transition: background .16s, box-shadow .18s, transform .13s;
+  cursor: pointer;
+}
+.btn-cancel { background: #ff6494; color: #fff;}
+.btn-cancel:hover, .btn-cancel:focus { background: #fd3b5d;}
+.btn-submit {
+  background: linear-gradient(90deg,#67c7fd 20%,#9a5bff 100%);
+  color: #fff;
+}
+.btn-submit:hover, .btn-submit:focus {
+  background: linear-gradient(90deg,#9a5bff 7%,#67c7fd 92%);
+  box-shadow: 0 4px 24px #a7eaff99;
+  transform: scale(1.04) translateY(-1px);
+}
+
+@keyframes modalFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes modalZoomIn { from { transform: scale(.93); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+@media (max-width: 700px) {
+  .edit-profile-card { padding: 1.2rem .7rem .8rem .7rem; border-radius: 1.1rem;}
+  .modal-content { padding: 1.2rem .7rem 1.2rem .7rem; min-width: 0; }
+}
