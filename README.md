@@ -1,110 +1,114 @@
-# 📌 Portfolio Full-Stack Project
+# 🌐 Portfolio FullStack Project
 
-A modern **full-stack portfolio application** built to showcase projects, skills, and achievements.  
-This project demonstrates proficiency in frontend, backend, and database integration with a clean and responsive design.
-
----
-
-## 👩‍💻 Authors
-- **Yazan Dawud**  
-- **Maria El Heeb**
+A modern and fully responsive **FullStack Portfolio Website** designed and developed to showcase projects, skills, and achievements.  
+This project demonstrates our ability to build scalable, well-structured applications using cutting-edge technologies in both **Frontend** and **Backend**.
 
 ---
 
-## 🚀 Features
-- 🖥 **Frontend:** Responsive design with modern UI/UX principles.  
-- ⚙️ **Backend:** RESTful APIs for serving portfolio data.  
-- 🗄 **Database:** Persistent storage of projects, skills, and contact information.  
-- 📬 **Contact Form:** Send messages directly from the website.  
-- 🌐 **Deployment Ready:** Structured for easy hosting on platforms like Vercel, Netlify, or Heroku.  
+## ✨ Features
+
+- 🖼️ **Responsive Portfolio UI** – clean, modern, and mobile-friendly design.  
+- 📂 **Projects Showcase** – dynamically rendered projects with images, descriptions, and links.  
+- 📧 **Contact Form** – send messages directly through a secure backend API.  
+- ⚡ **FullStack Architecture** – React frontend with Node.js/Express backend.  
+- 💾 **Database Integration** – MongoDB to store projects and contact messages.  
+- 🔐 **Security Best Practices** – environment variables, validation, and API protection.  
 
 ---
 
-## 🛠 Tech Stack
-**Frontend:** React / Angular  
-**Backend:** Node.js (Express) or Django / Flask  
-**Database:** MongoDB / PostgreSQL / MySQL  
-**Other:** REST APIs, Git, Docker (optional)
+## 🛠️ Tech Stack
+
+**Frontend:**
+- React.js  
+- React Router  
+- Axios  
+- CSS3 / SCSS (responsive design)  
+
+**Backend:**
+- Node.js  
+- Express.js  
+- MongoDB (Mongoose ODM)  
+- dotenv & cors  
+
+**Other Tools:**
+- Git & GitHub for version control  
+- ESLint + Prettier for code consistency  
+- Postman for API testing  
 
 ---
 
 ## 📂 Project Structure
-```bash
+
+```
 Portfolio-FullStack-Project/
-├── frontend/          # React or Angular app
-│   ├── public/
-│   └── src/
-│       ├── components/
-│       ├── pages/
-│       └── styles/
-├── backend/           # Node.js or Python backend
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   └── server.js
-├── database/          # SQL or NoSQL schemas & seed data
-├── README.md          # Project documentation
-└── package.json       # Dependencies
+├── frontend/              # React client-side code
+│   ├── src/
+│   │   ├── components/    # Reusable UI components
+│   │   ├── pages/         # Portfolio pages (Home, Projects, Contact, About)
+│   │   ├── assets/        # Images, icons, and static resources
+│   │   └── App.js
+│   └── package.json
+│
+├── backend/               # Express server
+│   ├── models/            # MongoDB Schemas
+│   ├── routes/            # API routes
+│   ├── controllers/       # Business logic
+│   ├── server.js          # Entry point
+│   └── package.json
+│
+└── README.md              # Project documentation
 ```
 
 ---
 
-## ⚡️ Getting Started
+## 🚀 Getting Started
 
-### 1️⃣ Clone the repository
-```bash
-git clone https://github.com/yazandahood8/Portfolio-FullStack-Project.git
-cd Portfolio-FullStack-Project
-```
+### Prerequisites
+- Node.js (v16+ recommended)  
+- MongoDB (local or Atlas connection)  
+- npm or yarn package manager  
 
-### 2️⃣ Install dependencies
-Frontend:
-```bash
-cd frontend
-npm install
-```
-Backend:
-```bash
-cd backend
-npm install
-```
+### Installation
 
-### 3️⃣ Run the project
-Start backend:
-```bash
-npm start
-```
-Start frontend:
-```bash
-npm run dev
-```
+1. Clone the repository:  
+   ```bash
+   git clone https://github.com/yazandahood8/Portfolio-FullStack-Project.git
+   cd Portfolio-FullStack-Project
+   ```
 
----
+2. Install dependencies for backend & frontend:  
+   ```bash
+   cd backend && npm install  
+   cd ../frontend && npm install  
+   ```
 
-## 🌍 Deployment
-You can deploy:
-- **Frontend** → Netlify, Vercel  
-- **Backend** → Heroku, Render, or Dockerized container  
-- **Database** → MongoDB Atlas, Supabase, or AWS RDS  
+3. Configure environment variables:  
+   Create a `.env` file inside `backend/` with:  
+   ```env
+   PORT=5000
+   MONGODB_URI=your_mongodb_connection_string
+   ```
 
----
+4. Run the development servers:  
+   ```bash
+   # Backend
+   cd backend
+   npm start
 
-## 📸 Screenshots (optional)
-_Add here some screenshots or GIFs once the UI is ready._
+   # Frontend (in a separate terminal)
+   cd frontend
+   npm start
+   ```
 
 ---
 
-## 🎯 Future Improvements
-- Add authentication (login/signup for admin panel).  
-- Include blog section for articles.  
-- Add dark mode support.  
-- Optimize performance and SEO.  
+## 👥 Authors
+
+- **Yazan Dawud** – FullStack Developer  
+- **Maria El Heeb** – FullStack Developer  
 
 ---
 
 ## 📜 License
-This project is licensed under the **MIT License** – feel free to use and modify it.
 
----
-
-🖊 Created by **Yazan Dawud** & **Maria El Heeb**
+This project is licensed under the MIT License – feel free to use, modify, and distribute with attribution.

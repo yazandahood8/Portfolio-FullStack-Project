@@ -41,6 +41,9 @@ export default function ProjectsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
+  // Filter state
+  const [filterTech, setFilterTech] = useState('All');
+
   // Modal state
   const [showModal, setShowModal] = useState(false);
   const [form, setForm] = useState({ ...emptyProject });
@@ -119,6 +122,7 @@ export default function ProjectsPage() {
         ...f,
         tech_stack: value.split(',').map(t => t.trim()).filter(Boolean)
       }));
+      setTechStackInput(value);
     } else if (name === 'priority') {
       setForm(f => ({
         ...f,
@@ -173,17 +177,57 @@ export default function ProjectsPage() {
     );
   }
 
+  // Collect unique tech list
+ const allTechs = Array.from(
+  new Set(
+    projects.flatMap(p => (p.tech_stack ? p.tech_stack.map(t => t.trim().toLowerCase()) : []))
+  )
+).map(t => t.charAt(0).toUpperCase() + t.slice(1)) // Capitalize first letter
+ .sort();
+
+  // Filtered projects
+  const filteredProjects =
+    filterTech === 'All'
+      ? projects
+      : projects.filter(
+          proj =>
+            proj.tech_stack &&
+            proj.tech_stack.some(
+              tech => tech.toLowerCase() === filterTech.toLowerCase()
+            )
+        );
+
   return (
     <div className="projects-bg min-h-screen flex-center">
       <div className="projects-main-card">
         <h1 className="projects-title">Projects</h1>
+
+        {/* Dropdown filter */}
+        {allTechs.length > 0 && (
+          <div className="projects-filter">
+            <label style={{ marginRight: 8, fontWeight: 600 }}>Filter:</label>
+            <select
+              value={filterTech}
+              onChange={e => setFilterTech(e.target.value)}
+              className="filter-select"
+            >
+              <option value="All">All</option>
+              {allTechs.map((tech, idx) => (
+                <option key={idx} value={tech}>
+                  {tech}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
         {loading && <p className="projects-loading">Loading projects…</p>}
         {error && <p className="projects-error">{error}</p>}
-        {!loading && projects.length === 0 && (
+        {!loading && filteredProjects.length === 0 && (
           <p className="projects-empty">No projects found.</p>
         )}
         <div className="projects-grid">
-          {projects.map(proj => (
+          {filteredProjects.map(proj => (
             <div key={proj.id} className="project-card">
               {proj.thumbnail_url && (
                 <img
@@ -360,7 +404,7 @@ export default function ProjectsPage() {
                   required
                   placeholder="e.g. React, Node.js, PostgreSQL"
                   value={techStackInput}
-                  onChange={e => setTechStackInput(e.target.value)}
+                  onChange={handleFormChange}
                 />
               </label>
               <label>
@@ -397,4 +441,3 @@ export default function ProjectsPage() {
     </div>
   );
 }
- 
