@@ -11,7 +11,7 @@ This project demonstrates our ability to build scalable, well-structured applica
 - 📂 **Projects Showcase** – dynamically rendered projects with images, descriptions, and links.  
 - 📧 **Contact Form** – send messages directly through a secure backend API.  
 - ⚡ **FullStack Architecture** – React frontend with Node.js/Express backend.  
-- 💾 **Database Integration** – MongoDB to store projects and contact messages.  
+- 💾 **Database Integration** – Postgress to store projects and contact messages.  
 - 🔐 **Security Best Practices** – environment variables, validation, and API protection.  
 
 ---
@@ -27,7 +27,7 @@ This project demonstrates our ability to build scalable, well-structured applica
 **Backend:**
 - Node.js  
 - Express.js  
-- MongoDB (Mongoose ODM)  
+- Postgress 
 - dotenv & cors  
 
 **Other Tools:**
@@ -50,7 +50,7 @@ Portfolio-FullStack-Project/
 │   └── package.json
 │
 ├── backend/               # Express server
-│   ├── models/            # MongoDB Schemas
+│   ├── models/            # Postgress Schemas
 │   ├── routes/            # API routes
 │   ├── controllers/       # Business logic
 │   ├── server.js          # Entry point
@@ -65,7 +65,7 @@ Portfolio-FullStack-Project/
 
 ### Prerequisites
 - Node.js (v16+ recommended)  
-- MongoDB (local or Atlas connection)  
+- Postgress (local or Atlas connection)  
 - npm or yarn package manager  
 
 ### Installation
@@ -86,7 +86,7 @@ Portfolio-FullStack-Project/
    Create a `.env` file inside `backend/` with:  
    ```env
    PORT=5000
-   MONGODB_URI=your_mongodb_connection_string
+   Postgress=your_Postgress_connection_string
    ```
 
 4. Run the development servers:  
