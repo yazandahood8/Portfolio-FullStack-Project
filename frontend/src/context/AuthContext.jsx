@@ -28,15 +28,15 @@ export const AuthProvider = ({ children }) => {
   }, [accessToken]);
 
   const register = async (formData) => {
-    const { data } = await apiRegister(formData);
-    setAccessToken(data.accessToken);
-    return data;
+    const response = await apiRegister(formData);
+    setAccessToken(response.data.accessToken);
+    return response;
   };
 
   const login = async ({ email, password }) => {
-    const { data } = await apiLogin({ email, password });
-    setAccessToken(data.accessToken);
-    return data;
+    const response = await apiLogin({ email, password });
+    setAccessToken(response.data.accessToken);
+    return response;
   };
 
   const logout = async () => {

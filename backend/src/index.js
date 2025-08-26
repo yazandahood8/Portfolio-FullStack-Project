@@ -23,9 +23,15 @@ const app = express();
 
 // parse JSON bodies
 app.use(express.json());
+
+const allowedOrigins = [
+  process.env.CORS_ORIGIN || 'http://localhost:3000',
+  'http://localhost:3001'
+];
+
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN || 'http://localhost:3001',
+    origin: allowedOrigins,
     credentials: true,
   })
 );
@@ -56,7 +62,7 @@ app.use('/api/v1', assistantRoutes);
 app.use(errorHandler);
 
 // Start server
-const PORT = process.env.PORT ;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server listening on port ${PORT}`);
 });

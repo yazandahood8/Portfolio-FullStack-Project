@@ -13,7 +13,7 @@ import BlogsPage from './pages/BlogsPage/BlogsPage';
 import BlogEditorPage from './pages/BlogEditorPage/BlogEditorPage';
 import ProjectDetailPage from './pages/ProjectDetailPage/ProjectDetailPage';
 import AssistantPage from './pages/AssistantPage/AssistantPage';
-
+import ContactPage from './pages/ContactPage/ContactPage';
 export default function AppRoutes() {
     return (
         <Routes>
@@ -26,6 +26,14 @@ export default function AppRoutes() {
                 element={
                     <ProtectedRoute>
                         <EditProfilePage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/contact"
+                element={
+                    <ProtectedRoute>
+                        <ContactPage />
                     </ProtectedRoute>
                 }
             />

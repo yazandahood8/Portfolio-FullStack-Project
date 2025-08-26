@@ -1,8 +1,10 @@
 // src/api/client.js
 import axios from 'axios';
 
+const baseURL = 'http://localhost:3000/api/v1';
+
 const client = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL,
 });
 
 client.interceptors.request.use(config => {
@@ -12,6 +14,6 @@ client.interceptors.request.use(config => {
   }
   return config;
 });
-console.log('👉 API base URL:', process.env.REACT_APP_API_URL);
+console.log('👉 API base URL:', baseURL);
 
 export default client;
