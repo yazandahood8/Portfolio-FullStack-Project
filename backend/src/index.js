@@ -14,6 +14,7 @@ import blogPostRoutes from './routes/blogPostRoutes.js';
 import educationRoutes from './routes/educationRoutes.js';
 import assistantRoutes from './routes/assistantRoutes.js';
 import volunteeringRoutes from './routes/volunteeringRoutes.js';
+import messagesRouter from './routes/messageRoutes.js';
 
 import path from 'path';
 import { errorHandler } from './middlewares/errorHandler.js';
@@ -52,6 +53,7 @@ app.use('/api/v1/users/:userId/projects', projectRoutes);
 app.use('/api/v1/users/:userId/blog-posts', blogPostRoutes);
 app.use('/api/v1/users/:userId/educations', educationRoutes);
 app.use('/api/v1/users/:userId/volunteerings', volunteeringRoutes);
+app.use('/api/v1/messages', messagesRouter);
 
 app.use('/api/v1/blog-posts', blogPostRoutes);
 app.use('/api/v1/uploads', uploadsRouter);
