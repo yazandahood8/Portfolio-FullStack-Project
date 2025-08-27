@@ -1,0 +1,124 @@
+/* src/pages/BlogPostDetailPage/BlogPostDetailPage.scss */
+
+.blogpost-detail {
+  /* Layout & spacing */
+  max-width: 900px;
+  margin: 0 auto;
+
+  /* Subtle fade-in */
+  animation: bp-fade-in 240ms ease-out;
+
+  /* Back button */
+  .btn.btn-link {
+    padding-left: 0;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .btn.btn-link:hover {
+    text-decoration: underline;
+  }
+
+  /* Title + meta */
+  h1 {
+    letter-spacing: 0.2px;
+    margin-bottom: 0.25rem;
+  }
+
+  /* Author strip (works with your existing Bootstrap classes) */
+  .d-flex.align-items-center.mt-2 {
+    padding: 0.35rem 0;
+    img.rounded-circle {
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      object-fit: cover;
+    }
+    .fw-semibold {
+      line-height: 1.2;
+    }
+    small.text-muted {
+      font-size: 0.85rem;
+    }
+  }
+
+  /* Cover image */
+  img.img-fluid.rounded.shadow-sm.my-3 {
+    border-radius: 14px !important;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.15) !important;
+    max-height: 480px;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  /* Article content */
+  article {
+    line-height: 1.75;
+    font-size: 1.06rem;
+    color: inherit;
+
+    p {
+      margin: 0 0 1rem;
+    }
+
+    h2, h3, h4 {
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    ul, ol {
+      margin: 0.75rem 0 1rem 1.25rem;
+      li { margin-bottom: 0.35rem; }
+    }
+
+    blockquote {
+      margin: 1rem 0;
+      padding: 0.75rem 1rem;
+      border-left: 4px solid rgba(0, 123, 255, 0.35);
+      background: rgba(0, 0, 0, 0.03);
+      border-radius: 8px;
+      font-style: italic;
+    }
+
+    pre {
+      background: #0f172a; /* slate-900 like */
+      color: #e2e8f0;      /* slate-200 */
+      border-radius: 10px;
+      padding: 1rem;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+    }
+
+    code {
+      background: rgba(15, 23, 42, 0.06);
+      padding: 0.15rem 0.35rem;
+      border-radius: 6px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.95em;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    a {
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+  }
+
+  /* Divider spacing */
+  hr.my-4 {
+    margin-top: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+    opacity: 0.15;
+  }
+}
+
+/* Keyframes */
+@keyframes bp-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

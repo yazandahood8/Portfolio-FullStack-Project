@@ -10,11 +10,11 @@ export const authenticate = async (req, res, next) => {
     }
 
     const header = req.headers.authorization || '';
-    if (!header.startsWith('Bearer ')) {
+    const token = header.startsWith('Bearer ') ? header.slice(7).trim() : null;
+    if (!token || token === 'null' || token === 'undefined') {
       return res.status(401).json({ success: false, message: 'Authentication required.' });
     }
 
-    const token = header.slice(7);
     let payload;
     try {
       payload = jwt.verify(token, JWT_SECRET);
@@ -32,7 +32,19 @@ export const authenticate = async (req, res, next) => {
       return res.status(401).json({ success: false, message: 'User not found.' });
     }
 
-    req.user = { id: String(user.id) };
+    // keep role if you have it in DB; default to 'user'
+    req.user = { id: String(user.id), role: user.role ?? 'user' };
     next();
-  } catch (err) { next(err); }
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const authorizeOwnerOrAdmin = (req, res, next) => {
+  if (!req.user) return res.status(401).json({ success: false, message: 'Unauthorized.' });
+
+  const routeUserId = String(req.params.userId || '');
+  if (req.user.role === 'admin' || req.user.id === routeUserId) return next();
+
+  return res.status(403).json({ success: false, message: 'Forbidden.' });
 };

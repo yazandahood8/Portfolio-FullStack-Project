@@ -21,7 +21,7 @@ router.get('/:id', getUser);
 router.put('/:id', authenticate, updateUser);
 router.delete('/:id', authenticate, deleteUser);
 router.get('/:id/cv', authenticate, getCV);
-router.get('/:id/cvAiPdf', authenticate, getCVAi);
+router.get('/:id/cvAiPdf', getCVAi);
 router.post('/:id/cvAiPdf/regenerate', authenticate, regenerateCVAi); // << ADD THIS LINE
 
 router.post(

@@ -1,0 +1,44 @@
+.messages-wrap {
+  max-width: 1000px;
+}
+
+.messages-table {
+  th, td {
+    vertical-align: middle;
+  }
+  .subject-cell {
+    max-width: 360px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  tr.unread {
+    background: rgba(13, 110, 253, 0.06); /* bootstrap primary w/ alpha */
+  }
+}
+
+/* Simple modal */
+.msg-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45); /* slate-900 alpha */
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  z-index: 1050;
+
+  &__content {
+    background: #fff;
+    color: #111827;
+    width: min(720px, 95vw);
+    border-radius: 14px;
+    box-shadow: 0 22px 60px rgba(0,0,0,.25);
+    padding: 1.25rem 1.25rem 1rem;
+  }
+
+  .msg-body {
+    white-space: pre-wrap;
+    line-height: 1.6;
+    font-size: 0.98rem;
+  }
+}

@@ -14,92 +14,72 @@ import BlogEditorPage from './pages/BlogEditorPage/BlogEditorPage';
 import ProjectDetailPage from './pages/ProjectDetailPage/ProjectDetailPage';
 import AssistantPage from './pages/AssistantPage/AssistantPage';
 import ContactPage from './pages/ContactPage/ContactPage';
+import BlogPostDetailPage from './pages/BlogPostDetailPage/BlogPostDetailPage';
+import MessagesPage from './pages/MessagesPage/MessagesPage';
+
 export default function AppRoutes() {
-    return (
-        <Routes>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/" element={<HomePage />} />
+  return (
+    <Routes>
+      {/* Auth */}
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
 
-            <Route
-                path="/edit-profile"
-                element={
-                    <ProtectedRoute>
-                        <EditProfilePage />
-                    </ProtectedRoute>
-                }
-            />
-            <Route
-                path="/contact"
-                element={
-                    <ProtectedRoute>
-                        <ContactPage />
-                    </ProtectedRoute>
-                }
-            />
-            <Route 
-            path="/assistant/:userId" 
-               element={
-                    <ProtectedRoute>
-                        <AssistantPage />
-                    </ProtectedRoute>
-                }
-            />
+      {/* Public (read-only) */}
+      <Route path="/" element={<HomePage />} />
+      <Route path="/contact" element={<ContactPage />} />
+      <Route path="/users/:userId" element={<UserDetailPage />} />
+      <Route path="/cv/:userId" element={<CVPage />} />
+      <Route path="/projects/:userId" element={<ProjectsPage />} />
+      <Route path="/projects/:userId/:projectId" element={<ProjectDetailPage />} />
+      <Route path="/blog-posts/:userId" element={<BlogsPage />} />
+<Route path="/blog-posts/:userId/:postId" element={<BlogPostDetailPage />} />
+<Route path="/blog-posts/:postId" element={<BlogPostDetailPage />} />
 
-            <Route
-                path="/cv/:userId"
-                element={
-                    <ProtectedRoute>
-                        <CVPage />
-                    </ProtectedRoute>
-                }
-            />
-            <Route
-                path="/projects/:userId"
-                element={
-                    <ProtectedRoute>
-                        <ProjectsPage />
-                    </ProtectedRoute>
-                }
-            />
-            <Route path="projects/:userId/:projectId" element={<ProjectDetailPage />} />
+      {/* Protected (write/admin) */}
 
-             <Route
-                path="/blog-posts/:userId"
-                element={
-                    <ProtectedRoute>
-                        <BlogsPage />
-                    </ProtectedRoute>
-                }
-            />
-              <Route
-                path="/blog-posts/new"
-                element={
-                    <ProtectedRoute>
-                        <BlogEditorPage />
-                    </ProtectedRoute>
-                }
-            />
-             <Route
-                path="/blog-posts/:userId/:blogId/edit"
-                element={
-                    <ProtectedRoute>
-                        <BlogEditorPage />
-                    </ProtectedRoute>
-                }
-            />
+      <Route
+  path="/admin/messages"
+  element={
+    <ProtectedRoute>
+      <MessagesPage />
+    </ProtectedRoute>
+  }
+/>
+      <Route
+        path="/edit-profile"
+        element={
+          <ProtectedRoute>
+            <EditProfilePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/assistant/:userId"
+        element={
+          <ProtectedRoute>
+            <AssistantPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/blog-posts/new"
+        element={
+          <ProtectedRoute>
+            <BlogEditorPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/blog-posts/:userId/:blogId/edit"
+        element={
+          <ProtectedRoute>
+            <BlogEditorPage />
+          </ProtectedRoute>
+        }
+      />
 
-            {/* catch-all */}
-            <Route path="*" element={<Navigate to="/" replace />} />
-            <Route
-                path="/users/:userId"
-                element={
-                    <ProtectedRoute>
-                        <UserDetailPage />
-                    </ProtectedRoute>
-                } />
-        </Routes>
-    );
+      {/* catch-all LAST */}
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
 }
-
-

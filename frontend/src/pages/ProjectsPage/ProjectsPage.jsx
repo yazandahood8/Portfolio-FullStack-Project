@@ -58,22 +58,28 @@ export default function ProjectsPage() {
   const [thumbPreview, setThumbPreview] = useState('');
   const [thumbUploading, setThumbUploading] = useState(false);
 
-  useEffect(() => {
-    if (!isAuthenticated || !userId) return;
-    const load = async () => {
-      setLoading(true);
-      setError('');
-      try {
-        const { data } = await fetchProjects(userId);
-        setProjects(data);
-      } catch (err) {
-        setError('Failed to load projects.');
-      } finally {
-        setLoading(false);
-      }
-    };
-    load();
-  }, [isAuthenticated, userId]);
+useEffect(() => {
+  const FALLBACK_USER_ID = 'c05a246c-8751-47ca-af16-ae92d1dff4e8';
+  // If not logged in → always use fallback. If logged in → use userId (or fallback if missing).
+  const effectiveId = isAuthenticated ? (userId || FALLBACK_USER_ID) : FALLBACK_USER_ID;
+
+  let alive = true;
+  (async () => {
+    setLoading(true);
+    setError('');
+    try {
+      const res = await fetchProjects(effectiveId);
+      const list = Array.isArray(res) ? res : (Array.isArray(res?.data) ? res.data : []);
+      if (alive) setProjects(list);
+    } catch (err) {
+      if (alive) setError('Failed to load projects.');
+    } finally {
+      if (alive) setLoading(false);
+    }
+  })();
+
+  return () => { alive = false; };
+}, [isAuthenticated, userId]);
 
   // Modal open/close
   const openModal = () => {
@@ -167,15 +173,7 @@ export default function ProjectsPage() {
     }
   };
 
-  if (!isAuthenticated) {
-    return (
-      <div className="projects-bg min-h-screen flex-center">
-        <div className="projects-card glass-card">
-          <p>Please log in to view projects.</p>
-        </div>
-      </div>
-    );
-  }
+
 
   // Collect unique tech list
  const allTechs = Array.from(
@@ -289,6 +287,8 @@ export default function ProjectsPage() {
           ))}
         </div>
         {/* Floating Add Project Button */}
+            {isAuthenticated && (
+
         <button
           className="add-project-fab"
           onClick={openModal}
@@ -296,6 +296,8 @@ export default function ProjectsPage() {
         >
           ＋
         </button>
+      )}
+
       </div>
       {/* Modal */}
       {showModal && (

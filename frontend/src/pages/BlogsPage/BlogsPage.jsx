@@ -18,7 +18,8 @@ export default function BlogsPage() {
   const [commentText, setCommentText] = useState('');
   const [loading, setLoading] = useState(true);
   const [commentLoading, setCommentLoading] = useState(false);
-
+const FALLBACK_USER_ID = 'c05a246c-8751-47ca-af16-ae92d1dff4e8';
+const ownerId = user?.id || FALLBACK_USER_ID;
   useEffect(() => {
     (async () => {
       setLoading(true);
@@ -154,8 +155,12 @@ export default function BlogsPage() {
                     </div>
                   </div>
                   <h5 className="card-title">
-                    <Link to={`/blog-posts/${post.id}/edit`} className="text-decoration-none">
-                      {post.title}
+                    
+                    <Link
+                   to={`/blog-posts/${ownerId}/${post.id}`}
+  className="text-decoration-none"
+>
+  {post.title}
                     </Link>
                   </h5>
                   <div className="text-muted">@{post.slug}</div>
@@ -183,7 +188,7 @@ export default function BlogsPage() {
                       💬 {commentCounts[post.id] || 0}
                     </button>
                   </div>
-                  {isAuthenticated && user.id === post.user_id && (
+                  {isAuthenticated && user?.id === post.user_id && (
                     <div>
                       <Link to={`/blog-posts/${post.id}/edit`} className="btn btn-sm btn-warning me-2">Edit</Link>
                       <button className="btn btn-sm btn-danger" onClick={() => confirmDelete(post.id)}>Delete</button>

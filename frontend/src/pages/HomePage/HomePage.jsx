@@ -19,19 +19,37 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const cardTiltRef = useCardTilt(13); // parallax intensity: 8-20 looks best
 
-  useEffect(() => {
-    if (!user?.id) return;
-    (async () => {
-      try {
-        const { data } = await fetchUser(user.id);
-        setProfile(data);
-      } catch (err) {
-        console.error('Failed to load profile', err);
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, [user]);
+ useEffect(() => {
+  let alive = true;
+
+  const ownerFallback = 'c05a246c-8751-47ca-af16-ae92d1dff4e8';
+  const envOwner =
+    (typeof import.meta !== 'undefined' && import.meta.env?.VITE_OWNER_ID) ||
+    (typeof process !== 'undefined' && process.env?.REACT_APP_OWNER_ID);
+  const viewedUserId = user?.id || envOwner || ownerFallback;
+
+  if (!viewedUserId) {
+    setLoading(false);
+    return;
+  }
+
+  (async () => {
+    setLoading(true);
+    try {
+      const { data } = await fetchUser(viewedUserId);
+      if (alive) setProfile(data);
+    } catch (err) {
+      console.error('Failed to load profile', err);
+      if (alive) setProfile(null);
+    } finally {
+      if (alive) setLoading(false);
+    }
+  })();
+
+  return () => {
+    alive = false;
+  };
+}, [user?.id]);
 
   if (loading) {
     return (

@@ -23,9 +23,11 @@ export default function CVPage() {
   const [certifications, setCertifications] = useState([]);
   const [volunteerings, setVolunteerings] = useState([]);
   const [showPDF, setShowPDF] = useState(false);
-
+  const FALLBACK_USER_ID = 'c05a246c-8751-47ca-af16-ae92d1dff4e8';
+  const effectiveUserId = (isAuthenticated && user?.id) ? user.id : FALLBACK_USER_ID;
+  const baseName = (profile?.full_name || user?.full_name || effectiveUserId);
   useEffect(() => {
-    if (!isAuthenticated || !user?.id) return;
+  
     setLoading(true);
     setError('');
 
@@ -41,20 +43,20 @@ export default function CVPage() {
           { data: volunteeringsData },
           pdfRes
         ] = await Promise.all([
-          client.get(`/users/${user.id}`),
-          fetchEducations(user.id),
-          fetchSkills(user.id),
-          fetchExperiences(user.id),
-          fetchProjects(user.id),
-          fetchCertifications(user.id),
-          fetchVolunteerings(user.id),
+          client.get(`/users/${effectiveUserId}`),
+          fetchEducations(effectiveUserId),
+          fetchSkills(effectiveUserId),
+          fetchExperiences(effectiveUserId),
+          fetchProjects(effectiveUserId),
+          fetchCertifications(effectiveUserId),
+          fetchVolunteerings(effectiveUserId),
 
           //client.get(`/users/${user.id}/cv`, { responseType: 'blob' }),
-           client.get(`/users/${user.id}/cvAiPdf`, { responseType: 'blob' })
+          client.get(`/users/${effectiveUserId}/cvAiPdf`, { responseType: 'blob' })
 
         ]);
         // console.log('educData Data:', educData);
-      //   console.log('certificationsData Data:', certificationsData);
+        //   console.log('certificationsData Data:', certificationsData);
         setProfile(userData);
         setEducations(Array.isArray(educData.data) ? educData.data : []);
         setSkills(Array.isArray(skillsData) ? skillsData : []);
@@ -83,53 +85,47 @@ export default function CVPage() {
   }, [isAuthenticated, user?.id]);
 
   const downloadCV = () => {
-    if (!blobUrl || !user) return;
-    const baseName = user.full_name ? user.full_name.replace(/\s+/g, '_') : user.id;
+    if (!blobUrl) return;
+    const safeName = (baseName || 'cv').replace(/\s+/g, '_');
     const link = document.createElement('a');
     link.href = blobUrl;
-    link.setAttribute('download', `${baseName}_CV.pdf`);
+    link.setAttribute('download', `${safeName}_CV.pdf`);
     document.body.appendChild(link);
     link.click();
     link.remove();
   };
-  const fetchPDF = async () => {
-  setLoading(true);
-  setError('');
-  try {
-    const response = await client.get(`/users/${user.id}/cvAiPdf`, { responseType: 'blob' });
-    const blob = new Blob([response.data], { type: 'application/pdf' });
-    setBlobUrl(URL.createObjectURL(blob));
-  } catch (err) {
-    setError('Failed to fetch PDF.');
-  } finally {
-    setLoading(false);
-  }
-};
-const handleRegenerateCV = async () => {
-  if (!user?.id) return;
-  setLoading(true);
-  setError('');
-  try {
-    // POST request to the new backend endpoint
-    await client.post(`/users/${user.id}/cvAiPdf/regenerate`);
-    // Optionally: download/show fresh PDF automatically
-    await fetchPDF(); // Your existing logic to fetch PDF and set blobUrl
-  } catch (err) {
-    setError('Failed to regenerate CV. Please try again.');
-  } finally {
-    setLoading(false);
-  }
-};
+ const fetchPDF = async () => {
+    setLoading(true);
+    setError('');
+    try {
+      const response = await client.get(`/users/${effectiveUserId}/cvAiPdf`, { responseType: 'blob' });
+      const blob = new Blob([response.data], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+      setBlobUrl((prev) => {
+        if (prev) URL.revokeObjectURL(prev);
+        return url;
+      });
+    } catch (err) {
+      setError('Failed to fetch PDF.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  if (!isAuthenticated) {
-    return (
-      <div className="cv-bg min-h-screen flex-center">
-        <div className="cv-card glass-card">
-          <p>Please log in to view your CV.</p>
-        </div>
-      </div>
-    );
-  }
+  const handleRegenerateCV = async () => {
+    if (!isAuthenticated || !user?.id) return; // only owner can regenerate
+    setLoading(true);
+    setError('');
+    try {
+      await client.post(`/users/${user.id}/cvAiPdf/regenerate`);
+      await fetchPDF();
+    } catch (err) {
+      setError('Failed to regenerate CV. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
   return (
     <div className="cv-bg min-h-screen flex-center">
@@ -237,9 +233,9 @@ const handleRegenerateCV = async () => {
         </section>
 
         {/* --- Certifications Section --- */}
-          <section className="cv-section">
-            <h2 className="cv-section-title">Licenses & Certifications</h2>
-            {certifications.length > 0 ? (
+        <section className="cv-section">
+          <h2 className="cv-section-title">Licenses & Certifications</h2>
+          {certifications.length > 0 ? (
 
             <ul className="cv-skills-list">
               {certifications.map(cert => (
@@ -248,19 +244,19 @@ const handleRegenerateCV = async () => {
                     <span className="item-title">{cert.name} - {cert.organization}</span>
                     <span className="item-subtitle">{cert.issued_date?.substring(0, 10)}{cert.expiration_date ? ` - ${cert.expiration_date.substring(0, 10)}` : ''}</span>
                   </div>
-                  
+
                 </li>
               ))}
             </ul>
-            ) : <p className="cv-empty">No certifications added.</p>}
-          </section>
+          ) : <p className="cv-empty">No certifications added.</p>}
+        </section>
 
-          {/* VOLUNTEERING */}
-          <section>
-            <div className="cv-section-title">
-              <h2 className="cv-section-title">Volunteering</h2>
-            </div>
-            {volunteerings.length > 0 ? (
+        {/* VOLUNTEERING */}
+        <section>
+          <div className="cv-section-title">
+            <h2 className="cv-section-title">Volunteering</h2>
+          </div>
+          {volunteerings.length > 0 ? (
 
             <ul className="item-list">
 
@@ -271,14 +267,14 @@ const handleRegenerateCV = async () => {
                     <span className="item-subtitle">{vol.start_date?.substring(0, 10)} – {vol.end_date ? vol.end_date.substring(0, 10) : 'Present'}</span>
                     <span className="item-subtitle">{vol.description}</span>
                   </div>
-                  
+
                 </li>
               ))}
             </ul>
-            ) : <p className="cv-empty">No volunteering added.</p>}
-          </section>
+          ) : <p className="cv-empty">No volunteering added.</p>}
+        </section>
 
-        {/* --- CV PDF Buttons --- */}
+         {/* --- CV PDF Buttons --- */}
         <div className="cv-btn-row">
           <button
             onClick={downloadCV}
@@ -292,12 +288,12 @@ const handleRegenerateCV = async () => {
             className="cv-show-btn"
             disabled={loading || !blobUrl}
           >
-            {showPDF ? "Hide PDF" : "Show PDF"}
+            {showPDF ? 'Hide PDF' : 'Show PDF'}
           </button>
           <button
             onClick={handleRegenerateCV}
             className="cv-show-btn"
-            disabled={loading}
+            disabled={loading || !isAuthenticated}
             style={{ marginLeft: 12 }}
           >
             Regenerate PDF
@@ -317,7 +313,7 @@ const handleRegenerateCV = async () => {
               Your browser doesn’t support inline PDFs. You can{' '}
               <a
                 href={blobUrl}
-                download={`${user.full_name ?? user.id}_CV.pdf`}
+                download={`${(baseName || 'cv').replace(/\s+/g, '_')}_CV.pdf`}
                 className="cv-link"
               >
                 download the PDF here

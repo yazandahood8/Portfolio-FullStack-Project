@@ -15,18 +15,22 @@ export default function ProjectDetailPage() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  // Fallback when userId is null/undefined/empty or the literal strings "null"/"undefined"
+  const FALLBACK_USER_ID = 'c05a246c-8751-47ca-af16-ae92d1dff4e8';
+  const effectiveUserId =
+    userId && userId !== 'null' && userId !== 'undefined' ? userId : FALLBACK_USER_ID;
+  console.log('Effective User ID:', effectiveUserId);
   useEffect(() => {
     async function load() {
       try {
-        const { data } = await client.get(`/users/${userId}/projects/${projectId}`);
-
+        const { data } = await client.get(`/users/${effectiveUserId}/projects/${projectId}`);
         setProject(data.data);
       } catch (err) {
         setError('Project not found.');
       }
     }
     load();
-  }, [userId, projectId]);
+  }, [effectiveUserId, projectId]);
 
   if (error) return <div className="project-detail-bg">{error}</div>;
   if (!project) return <div className="project-detail-bg">Loading…</div>;
