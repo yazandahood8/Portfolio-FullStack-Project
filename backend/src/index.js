@@ -31,6 +31,7 @@ app.use(express.json());
 const allowedOrigins = [
   process.env.CORS_ORIGIN || 'http://localhost:3000',
   'http://localhost:3001',
+  'https://portfolio-fullstack-project-1.onrender.com',
 ];
 app.use(cors({ origin: allowedOrigins, credentials: true }));
 
