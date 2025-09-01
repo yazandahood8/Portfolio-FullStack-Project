@@ -43,7 +43,7 @@ export default function CVPage() {
           { data: volunteeringsData },
           pdfRes
         ] = await Promise.all([
-          client.get(`/users/${effectiveUserId}`),
+          client.get(`/api/v1/users/${effectiveUserId}`),
           fetchEducations(effectiveUserId),
           fetchSkills(effectiveUserId),
           fetchExperiences(effectiveUserId),
@@ -52,7 +52,7 @@ export default function CVPage() {
           fetchVolunteerings(effectiveUserId),
 
           //client.get(`/users/${user.id}/cv`, { responseType: 'blob' }),
-          client.get(`/users/${effectiveUserId}/cvAiPdf`, { responseType: 'blob' })
+          client.get(`/api/v1/users/${effectiveUserId}/cvAiPdf`, { responseType: 'blob' })
 
         ]);
         // console.log('educData Data:', educData);
@@ -98,7 +98,7 @@ export default function CVPage() {
     setLoading(true);
     setError('');
     try {
-      const response = await client.get(`/users/${effectiveUserId}/cvAiPdf`, { responseType: 'blob' });
+      const response = await client.get(`/api/v1/users/${effectiveUserId}/cvAiPdf`, { responseType: 'blob' });
       const blob = new Blob([response.data], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
       setBlobUrl((prev) => {
