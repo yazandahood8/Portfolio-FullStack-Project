@@ -6,8 +6,7 @@ dotenv.config();
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  // if you're deploying to a platform that requires SSL (e.g. Heroku), uncomment:
-  // ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+  ssl: process.env.NODE_ENV === "production" ? { require: true, rejectUnauthorized: false } : false,
 });
 
 pool.on('error', (err) => {
