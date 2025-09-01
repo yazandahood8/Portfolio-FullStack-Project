@@ -33,13 +33,7 @@ const allowedOrigins = [
   'http://localhost:3001',
 ];
 app.use(cors({ origin: allowedOrigins, credentials: true }));
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    require: true,
-    rejectUnauthorized: false, // Render uses self-signed certs
-  },
-});
+
 // DB connect (startup check)
 pool.connect()
   .then(() => console.log('✅ Connected to PostgreSQL'))
