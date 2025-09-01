@@ -2,16 +2,16 @@ import client from './client';
 
 // GET all
 export const fetchEducations = (userId) =>
-  client.get(`/users/${userId}/educations`);
+  client.get(`/api/v1/users/${userId}/educations`);
 
 // POST
 export const createEducation = (userId, data) =>
-  client.post(`/users/${userId}/educations`, data);
+  client.post(`/api/v1/users/${userId}/educations`, data);
 
 // PUT
 export const updateEducation = (userId, eduId, data) =>
-  client.put(`/users/${userId}/educations/${eduId}`, data);
+  client.put(`/api/v1/users/${userId}/educations/${eduId}`, data);
 
 // DELETE
 export const deleteEducation = (userId, eduId) =>
-  client.delete(`/users/${userId}/educations/${eduId}`);
+  client.delete(`/api/v1/users/${userId}/educations/${eduId}`);
