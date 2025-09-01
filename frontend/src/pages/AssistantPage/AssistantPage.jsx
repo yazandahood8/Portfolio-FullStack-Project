@@ -20,7 +20,7 @@ export default function AssistantPage() {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:3000/api/v1/assistant/plan', {
+      const response = await fetch('https://portfolio-backend-ujap.onrender.com/api/v1/assistant/plan', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: user.id, message: input })
@@ -53,7 +53,7 @@ export default function AssistantPage() {
     setExecuting(true);
 
     try {
-      const response = await fetch('http://localhost:3000/api/v1/assistant/execute', {
+      const response = await fetch('https://portfolio-backend-ujap.onrender.com/api/v1/assistant/execute', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: user.id, plan })
