@@ -1,7 +1,8 @@
 // src/api/client.js
 import axios from 'axios';
 
-const baseURL = 'http://localhost:3000/api/v1';
+//const baseURL = 'http://localhost:3000/api/v1';
+const baseURL = 'https://portfolio-backend-ujap.onrender.com';
 
 const client = axios.create({
   baseURL,
