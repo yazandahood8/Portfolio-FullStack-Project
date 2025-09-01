@@ -1,13 +1,13 @@
 import client from './client';
 
 export const fetchCertifications = (userId) =>
-  client.get(`/users/${userId}/certifications`);
+  client.get(`/api/v1/users/${userId}/certifications`);
 
 export const createCertification = (userId, data) =>
-  client.post(`/users/${userId}/certifications`, data);
+  client.post(`/api/v1/users/${userId}/certifications`, data);
 
 export const updateCertification = (userId, certId, data) =>
-  client.put(`/users/${userId}/certifications/${certId}`, data);
+  client.put(`/api/v1/users/${userId}/certifications/${certId}`, data);
 
 export const deleteCertification = (userId, certId) =>
-  client.delete(`/users/${userId}/certifications/${certId}`);
+  client.delete(`/api/v1/users/${userId}/certifications/${certId}`);
