@@ -12,16 +12,16 @@ export const fetchProject = async (userId, projectId) => {
 };
 
 export const createProject = async (userId, projectData) => {
-  const res = await client.post(`/users/${userId}/projects`, projectData);
+  const res = await client.post(`/api/v1/users/${userId}/projects`, projectData);
   return res.data;
 };
 
 export const updateProject = async (userId, projectId, projectData) => {
-  const res = await client.put(`/users/${userId}/projects/${projectId}`, projectData);
+  const res = await client.put(`/api/v1/users/${userId}/projects/${projectId}`, projectData);
   return res.data;
 };
 
 export const deleteProject = async (userId, projectId) => {
-  const res = await client.delete(`/users/${userId}/projects/${projectId}`);
+  const res = await client.delete(`/api/v1/users/${userId}/projects/${projectId}`);
   return res.data;
 };
