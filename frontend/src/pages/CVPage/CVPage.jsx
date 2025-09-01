@@ -117,7 +117,7 @@ export default function CVPage() {
     setLoading(true);
     setError('');
     try {
-      await client.post(`/users/${user.id}/cvAiPdf/regenerate`);
+      await client.post(`/api/v1/users/${user.id}/cvAiPdf/regenerate`);
       await fetchPDF();
     } catch (err) {
       setError('Failed to regenerate CV. Please try again.');
