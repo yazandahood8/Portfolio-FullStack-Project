@@ -1,8 +1,9 @@
 // src/api/auth.js
 import client from './client';
+const API = import.meta.env.VITE_API_BASE ?? 'https://portfolio-backend-ujap.onrender.com';
 
 export const register = async ({ full_name, email, password, phone, location, profile_image_url, about, bio }) => {
-  const res = await client.post('/auth/register', {
+  const res = await fetch(`${API}/api/v1/auth/register`, {
     full_name,
     email,
     password,
