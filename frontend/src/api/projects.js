@@ -2,12 +2,12 @@
 import client from './client';
 
 export const fetchProjects = async (userId) => {
-  const res = await client.get(`/users/${userId}/projects`);
+  const res = await client.get(`/api/v1/users/${userId}/projects`);
   return res.data;
 };
 
 export const fetchProject = async (userId, projectId) => {
-  const res = await client.get(`/users/${userId}/projects/${projectId}`);
+  const res = await client.get(`/api/v1/users/${userId}/projects/${projectId}`);
   return res.data;
 };
 
