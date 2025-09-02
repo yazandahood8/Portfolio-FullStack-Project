@@ -20,7 +20,7 @@ export default function BlogPostDetailPage() {
       setError('');
       try {
         // Public detail endpoint (see backend step)
-        const { data } = await client.get(`/blog-posts/${effectivePostId}`);
+        const { data } = await client.get(`/api/v1/blog-posts/${effectivePostId}`);
         const payload = data?.data || data || {};
         if (!alive) return;
         setPost(payload.post || payload);            // supports both shapes
