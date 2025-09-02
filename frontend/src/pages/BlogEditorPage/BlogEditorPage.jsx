@@ -40,7 +40,7 @@ export default function BlogEditorPage() {
       (async () => {
         setLoading(true);
         try {
-          const { data } = await client.get(`/users/${user.id}/blog-posts/${blogId}`);
+          const { data } = await client.get(`/api/v1/users/${user.id}/blog-posts/${blogId}`);
           setForm({
             ...data,
             published_at: data.published_at?.substring(0, 10) || ''
@@ -86,7 +86,7 @@ export default function BlogEditorPage() {
     // You must have an endpoint like /users/:userId/blog-posts/upload-image (POST, FormData)
     const fd = new FormData();
     fd.append('image', imageFile);
-    const { data } = await client.post(`/users/${user.id}/blog-posts/upload-image`, fd, {
+    const { data } = await client.post(`/api/v1/users/${user.id}/blog-posts/upload-image`, fd, {
       headers: { 'Content-Type': 'multipart/form-data' }
     });
     return data.url || data.cover_image_url; // backend should return uploaded url
@@ -103,9 +103,9 @@ export default function BlogEditorPage() {
         cover_image_url
       };
       if (blogId && blogId !== "new") {
-        await client.put(`/users/${user.id}/blog-posts/${blogId}`, payload);
+        await client.put(`/api/v1/users/${user.id}/blog-posts/${blogId}`, payload);
       } else {
-        await client.post(`/users/${user.id}/blog-posts`, payload);
+        await client.post(`/api/v1/users/${user.id}/blog-posts`, payload);
       }
       navigate('/blog-posts');
     } catch (err) {
