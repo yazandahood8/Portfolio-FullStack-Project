@@ -35,24 +35,35 @@ export default function BlogEditorPage() {
 
   // Load for editing
   useEffect(() => {
-    if (!isAuthenticated || !user?.id) return;
-    if (blogId && blogId !== "new") {
-      (async () => {
-        setLoading(true);
-        try {
-          const { data } = await client.get(`/api/v1/users/${user.id}/blog-posts/${blogId}`);
-          setForm({
-            ...data,
-            published_at: data.published_at?.substring(0, 10) || ''
-          });
-          setImagePreview(data.cover_image_url || '');
-        } catch (err) {
-          setError('Failed to load blog post.');
-        }
+  if (!isAuthenticated || !user?.id) return;
+  if (blogId && blogId !== "new") {
+    (async () => {
+      setLoading(true);
+      try {
+        const res = await client.get(`/api/v1/users/${user.id}/blog-posts/${blogId}`);
+        const post = res?.data?.data; // <-- unwrap the real post
+
+        // Defensive fill so controlled inputs always get strings
+        setForm(f => ({
+          ...f,
+          title: post?.title ?? '',
+          slug: post?.slug ?? '',
+          excerpt: post?.excerpt ?? '',
+          content: post?.content ?? '',
+          cover_image_url: post?.cover_image_url ?? '',
+          published_at: post?.published_at ? post.published_at.slice(0, 10) : ''
+        }));
+
+        setImagePreview(post?.cover_image_url ?? '');
+      } catch (err) {
+        console.error(err);
+        setError('Failed to load blog post.');
+      } finally {
         setLoading(false);
-      })();
-    }
-  }, [user, isAuthenticated, blogId]);
+      }
+    })();
+  }
+}, [user?.id, isAuthenticated, blogId]);
 
   // Clean up image preview URL
   useEffect(() => () => { if (imagePreview?.startsWith('blob:')) URL.revokeObjectURL(imagePreview); }, [imagePreview]);
