@@ -25,7 +25,7 @@ export default function ContactPage() {
     setError("");
     setSuccess("");
     try {
-      await client.post("/messages", form); // send data to backend
+      await client.post("api/v1/messages", form); // send data to backend
       setSuccess("Message sent successfully!");
       setForm({ name: "", email: "", subject: "", message: "" });
     } catch (err) {
