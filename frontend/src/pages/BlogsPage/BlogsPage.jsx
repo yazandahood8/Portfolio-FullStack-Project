@@ -24,7 +24,7 @@ const ownerId = user?.id || FALLBACK_USER_ID;
     (async () => {
       setLoading(true);
       try {
-        const { data } = await client.get('/blog-posts/all');
+        const { data } = await client.get('/api/v1/blog-posts/all');
         const allPosts = Array.isArray(data?.data) ? data.data : [];
         setPosts(allPosts);
 
@@ -38,9 +38,9 @@ const ownerId = user?.id || FALLBACK_USER_ID;
 
         const likeCommentUserData = await Promise.all(allPosts.map(async (post) => {
           const [likeRes, commentRes, likedRes] = await Promise.all([
-            client.get(`/blog-posts/${post.id}/likes/count`),
-            client.get(`/blog-posts/${post.id}/comments/count`),
-            isAuthenticated ? client.get(`/blog-posts/${post.id}/likes/me`) : Promise.resolve({ data: { data: {} } })
+            client.get(`/api/v1/blog-posts/${post.id}/likes/count`),
+            client.get(`/api/v1/blog-posts/${post.id}/comments/count`),
+            isAuthenticated ? client.get(`/api/v1/blog-posts/${post.id}/likes/me`) : Promise.resolve({ data: { data: {} } })
           ]);
           return {
             id: post.id,
@@ -65,7 +65,7 @@ const ownerId = user?.id || FALLBACK_USER_ID;
 
   const doDelete = async () => {
     if (!user) return;
-    await client.delete(`/users/${user.id}/blog-posts/${deleteId}`);
+    await client.delete(`/api/v1/users/${user.id}/blog-posts/${deleteId}`);
     setPosts(posts.filter(p => p.id !== deleteId));
     setDeleteId(null);
   };
@@ -73,7 +73,7 @@ const ownerId = user?.id || FALLBACK_USER_ID;
   const handleLike = async (postId) => {
     if (!isAuthenticated) return;
     const liked = userLiked[postId];
-    const endpoint = `/blog-posts/${postId}/likes`;
+    const endpoint = `/api/v1/blog-posts/${postId}/likes`;
     liked ? await client.delete(endpoint) : await client.post(endpoint);
     setUserLiked(prev => ({ ...prev, [postId]: !liked }));
     setLikeCounts(prev => ({ ...prev, [postId]: (prev[postId] || 0) + (liked ? -1 : 1) }));
@@ -83,7 +83,7 @@ const ownerId = user?.id || FALLBACK_USER_ID;
     setOpenCommentPostId(postId);
     setCommentLoading(true);
     try {
-      const res = await client.get(`/blog-posts/${postId}/comments`);
+      const res = await client.get(`/api/v1/blog-posts/${postId}/comments`);
       const data = Array.isArray(res.data?.data) ? res.data.data : [];
       setComments(data);
 
@@ -110,7 +110,7 @@ const ownerId = user?.id || FALLBACK_USER_ID;
 
   const postComment = async () => {
     if (!isAuthenticated || !commentText.trim()) return;
-    await client.post(`/blog-posts/${openCommentPostId}/comments`, {
+    await client.post(`/api/v1/blog-posts/${openCommentPostId}/comments`, {
       text: commentText,
       author_name: user.full_name,
       user_id: user.id
@@ -128,7 +128,7 @@ const ownerId = user?.id || FALLBACK_USER_ID;
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h1 className="c-feed__title">Blog Feed</h1>
         {isAuthenticated && (
-          <Link to="/blog-posts/new" className="btn btn-primary">New Post</Link>
+          <Link to="/api/v1/blog-posts/new" className="btn btn-primary">New Post</Link>
         )}
       </div>
 
