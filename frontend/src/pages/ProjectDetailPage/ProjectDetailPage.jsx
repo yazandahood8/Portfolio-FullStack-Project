@@ -23,7 +23,7 @@ export default function ProjectDetailPage() {
   useEffect(() => {
     async function load() {
       try {
-        const { data } = await client.get(`/users/${effectiveUserId}/projects/${projectId}`);
+        const { data } = await client.get(`api/v1/users/${effectiveUserId}/projects/${projectId}`);
         setProject(data.data);
       } catch (err) {
         setError('Project not found.');
