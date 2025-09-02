@@ -128,7 +128,7 @@ const ownerId = user?.id || FALLBACK_USER_ID;
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h1 className="c-feed__title">Blog Feed</h1>
         {isAuthenticated && (
-          <Link to="/api/v1/blog-posts/new" className="btn btn-primary">New Post</Link>
+          <Link to="/blog-posts/new" className="btn btn-primary">New Post</Link>
         )}
       </div>
 
