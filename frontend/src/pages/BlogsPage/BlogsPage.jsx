@@ -29,7 +29,7 @@ const ownerId = user?.id || FALLBACK_USER_ID;
         setPosts(allPosts);
 
         const userIds = [...new Set(allPosts.map(p => p.user_id))];
-        const authorPromises = userIds.map(uid => client.get(`/users/${uid}`));
+        const authorPromises = userIds.map(uid => client.get(`/api/v1/users/${uid}`));
         const authorResponses = await Promise.all(authorPromises);
         const authorData = Object.fromEntries(
           authorResponses.map((res, i) => [userIds[i], res.data])
@@ -89,7 +89,7 @@ const ownerId = user?.id || FALLBACK_USER_ID;
 
       const commenterIds = [...new Set(data.map(c => c.user_id))];
       const newAuthors = await Promise.all(commenterIds.map(id =>
-        !authorsById[id] ? client.get(`/users/${id}`) : null
+        !authorsById[id] ? client.get(`/api/v1/users/${id}`) : null
       ));
       newAuthors.forEach((res, i) => {
         if (res) {
